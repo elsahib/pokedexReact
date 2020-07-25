@@ -9,13 +9,29 @@ import React, { useState } from 'react'
 
 const CaughtPokemon = ({ todayDate }) => {
     const [totalCaught, setTotalCaught] = useState(0);
+    const [pokemonNameInput, setPokemonNameInput] = useState("");
+    const [caughtPokemon, setCaughtPokemon] = useState([])
 
+    const catchPokemon = () => {
+        setCaughtPokemon(caughtPokemon.concat([pokemonNameInput]))
+    }
     const incrementTotal = () => {
         setTotalCaught(totalCaught + 1);
+
+    }
+
+    const handleInputChange = (event) => {
+        console.log(event.target.value);
+        setPokemonNameInput(event.target.value)
     }
     return (
         <div>
-            <button onClick={incrementTotal}> Catch Pokemon!</button>
+            <input
+                type="text"
+                value={pokemonNameInput}
+                onChange={handleInputChange}
+            />
+            <button onClick={catchPokemon}> Catch Pokemon!</button>
             <p>Caught {totalCaught} Pokemon on {todayDate}</p>
         </div>)
 };
