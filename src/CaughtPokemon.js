@@ -12,7 +12,6 @@ const CaughtPokemon = ({ todayDate }) => {
     const [caughtPokemon, setCaughtPokemon] = useState([])
 
     const catchPokemon = () => {
-        let regx = /^\s*$/;
         if (pokemonNameInput.trim() == "" || !pokemonNameInput) {
             setPokemonNameInput("")
             return;
