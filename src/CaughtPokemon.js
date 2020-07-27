@@ -8,15 +8,18 @@ import React, { useState } from 'react'
 
 
 const CaughtPokemon = ({ todayDate }) => {
-    const [totalCaught, setTotalCaught] = useState(0);
     const [pokemonNameInput, setPokemonNameInput] = useState("");
     const [caughtPokemon, setCaughtPokemon] = useState([])
 
     const catchPokemon = () => {
-        setCaughtPokemon(caughtPokemon.concat([pokemonNameInput]))
-    }
-    const incrementTotal = () => {
-        setTotalCaught(totalCaught + 1);
+        let regx = /^\s*$/;
+        if (pokemonNameInput.trim() == "" || !pokemonNameInput) {
+            setPokemonNameInput("")
+            return;
+        } else {
+            setCaughtPokemon(caughtPokemon.concat([pokemonNameInput]))
+            setPokemonNameInput("")
+        }
 
     }
 
@@ -32,7 +35,10 @@ const CaughtPokemon = ({ todayDate }) => {
                 onChange={handleInputChange}
             />
             <button onClick={catchPokemon}> Catch Pokemon!</button>
-            <p>Caught {totalCaught} Pokemon on {todayDate}</p>
+            <p>Caught {caughtPokemon.length} Pokemon on {todayDate}</p>
+            They are :<ul>
+                {caughtPokemon.map((pokemon, index) => <li key={index}>{pokemon}</li>)}
+            </ul>
         </div>)
 };
 
